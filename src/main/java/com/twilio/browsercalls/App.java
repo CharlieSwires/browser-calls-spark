@@ -5,6 +5,7 @@ import com.twilio.browsercalls.lib.AppSetup;
 import com.twilio.browsercalls.lib.DbSeeder;
 import com.twilio.browsercalls.logging.LoggingFilter;
 import com.twilio.browsercalls.models.TicketService;
+import com.twilio.browsercalls.models.PersonService;
 import spark.Spark;
 import spark.template.mustache.MustacheTemplateEngine;
 
@@ -43,6 +44,7 @@ public class App {
     Spark.staticFileLocation("/public");
 
     TicketService ticketService = new TicketService(factory.createEntityManager());
+    PersonService personService = new PersonService(factory.createEntityManager());
 
     /**
      * Seed the database with example data if no records exist.
@@ -53,8 +55,11 @@ public class App {
     get("/", new HomeController().index, new MustacheTemplateEngine());
     post("/token/generate", new TokenController().getToken);
     get("/dashboard", new DashboardController(ticketService).index, new MustacheTemplateEngine());
+    get("/findPerson", new FindPersonController(personService).index, new MustacheTemplateEngine());
     post("/call/connect", new CallController().connect);
     post("/ticket/create", new TicketController(ticketService).create,
+            new MustacheTemplateEngine());
+    post("/person/create", new PersonController(personService).create,
         new MustacheTemplateEngine());
 //    Thread t = new Thread(){
 //    	@Override

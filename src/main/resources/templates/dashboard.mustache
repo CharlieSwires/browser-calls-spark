@@ -15,17 +15,17 @@
         This is the list of people on the call.
     </p>
    <p>
-          <button onclick="callCustomer('{{phoneNumber}}')" type="button"
+          <button onclick="addOutgoing('{{phoneNumber}}')" type="button"
                                     class="btn btn-primary btn-md call-customer-button">
                                 Add to Conference Outgoing
           </button>
-          <button onclick="callCustomer('{{phoneNumber}}')" type="button"
+          <button onclick="turnOnIVR()" type="button"
                                     class="btn btn-primary btn-md call-customer-button">
                                 IVR ON
           </button>
-          <button onclick="callCustomer('{{phoneNumber}}')" type="button"
+          <button onclick="turnOffIVR()" type="button"
                                     class="btn btn-primary btn-md call-customer-button">
-                                 IVR OFF
+                                IVR OFF
           </button>
     </p>
 
@@ -48,8 +48,7 @@
                     <button class="btn btn-md btn-danger hangup-button" disabled onclick="hangUp()">
                         Hang up
                     </button>
-    <br>
-                    <button onclick="callCustomer('{{phoneNumber}}')" type="button"
+                    <button onclick="addIncoming('{{phoneNumber}}')" type="button"
                                     class="btn btn-primary btn-md call-customer-button">
                          Add to Conference Incoming
                         
@@ -71,29 +70,33 @@
 
                         <div class="pull-right">
                         <div class="list-group">
-                        <p>
+                        	<p>
                             <button onclick="callCustomer('{{phoneNumber}}')" type="button"
                                     class="btn btn-primary btn-md call-customer-button">
                                 <span class="glyphicon glyphicon-earphone"
                                       aria-hidden="true"></span>
                                 Call
-                            </button></p>
-                            <p><button onclick="callCustomer('{{phoneNumber}}')" type="button"
+                            </button>
+                            </p>
+                            <p><button onclick="holdMusic('{{phoneNumber}}',{{holdOn}})" type="button"
                                     class="btn btn-primary btn-md call-customer-button">
                                 
                                 Hold Music
-                            </button></p>
-                             <p><button onclick="callCustomer('{{phoneNumber}}')" type="button"
+                            </button>
+                            </p>
+                             <p><button onclick="disconnect('{{phoneNumber}}')" type="button"
                                     class="btn btn-primary btn-md call-customer-button">
                                 
                                 Hang Up
-                            </button></p>
-                            <p><button onclick="callCustomer('{{phoneNumber}}')" type="button"
+                            </button>
+                            </p>
+                            <p><a href="/findPerson" type="button"
                                     class="btn btn-primary btn-md call-customer-button">
                                 <span class="glyphicon glyphicon-earphone"
                                       aria-hidden="true"></span>
                                 Find Person
-                            </button></p>
+                            </a>
+                            </p>
                         </div>
                         </div>
                         <p><strong>Name:</strong> {{name}}</p>

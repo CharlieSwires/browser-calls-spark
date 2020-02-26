@@ -102,5 +102,23 @@ function callSupport() {
 
 /* End a call */
 function hangUp() {
-  Twilio.Device.disconnectAll();
-}
+	  Twilio.Device.disconnectAll();
+	}
+function addOutgoing() {
+	  alert("addOutgoing");
+	}
+function addIncoming() {
+		alert("addIncoming");
+	}
+function turnOnIVR() {
+	  alert("turnOnIVR");
+	}
+function turnOffIVR() {
+	  alert("turnOffIVR");
+	}
+function holdMusic(phoneNumber,on) {
+	  alert("holdMusic"+phoneNumber+on);
+	}
+function disconnect(phoneNumber) {
+	  alert("disconnect"+phoneNumber);
+	}

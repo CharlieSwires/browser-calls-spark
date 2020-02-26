@@ -54,7 +54,7 @@
 
     <div class="row">
 
-        <div class="col-md-6 col-md-push-6">
+        <div class="col-md-3 col-md-push-3">
 
             <div class="panel panel-info client-controls">
                 <div class="panel-heading">
@@ -70,7 +70,6 @@
                     <button class="btn btn-lg btn-primary call-support-button"
                             onclick="callSupport()">
                         <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Call
-                        support
                     </button>
                     <button class="btn btn-lg btn-danger hangup-button" disabled onclick="hangUp()">
                         Hang up
@@ -80,7 +79,7 @@
 
         </div>
 
-        <div class="col-md-6 col-md-pull-6">
+        <div class="col-md-3 col-md-pull-3">
             <form method="POST" action="/ticket/create">
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -96,6 +95,24 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Submit ticket
+                    </button>
+                </div>
+            </form>
+        </div>
+   
+          
+      <div class="col-md-3 col-md-pull-0">
+            <form method="POST" action="/person/create">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" name="name" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="phone_number">Phone number</label>
+                    <input class="form-control" type="text" name="phone_number" id="phone_number">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit person
                     </button>
                 </div>
             </form>
