@@ -9,11 +9,24 @@
 {{$content}}
 <div class="container">
 
-    <h2>Support Tickets</h2>
+    <h2>Conference Call</h2>
 
     <p class="lead">
-        This is the list of most recent support tickets. Click the "Call customer" button to start a
-        phone call from your browser.
+        This is the list of people on the call.
+    </p>
+   <p>
+          <button onclick="callCustomer('{{phoneNumber}}')" type="button"
+                                    class="btn btn-primary btn-md call-customer-button">
+                                Add to Conference Outgoing
+          </button>
+          <button onclick="callCustomer('{{phoneNumber}}')" type="button"
+                                    class="btn btn-primary btn-md call-customer-button">
+                                IVR ON
+          </button>
+          <button onclick="callCustomer('{{phoneNumber}}')" type="button"
+                                    class="btn btn-primary btn-md call-customer-button">
+                                 IVR OFF
+          </button>
     </p>
 
     <div class="row">
@@ -21,7 +34,7 @@
         <div class="col-md-4 col-md-push-8">
             <div class="panel panel-primary client-controls">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Make a call</h3>
+                    <h3 class="panel-title">Receive a call</h3>
                 </div>
                 <div class="panel-body">
                     <p><strong>Status</strong></p>
@@ -30,11 +43,18 @@
                         Connecting to Twilio...
                     </div>
 
-                    <button class="btn btn-lg btn-success answer-button" disabled>Answer call
+                    <button class="btn btn-md btn-success answer-button" disabled>Answer call
                     </button>
-                    <button class="btn btn-lg btn-danger hangup-button" disabled onclick="hangUp()">
+                    <button class="btn btn-md btn-danger hangup-button" disabled onclick="hangUp()">
                         Hang up
                     </button>
+    <br>
+                    <button onclick="callCustomer('{{phoneNumber}}')" type="button"
+                                    class="btn btn-primary btn-md call-customer-button">
+                         Add to Conference Incoming
+                        
+          			</button>
+                    
                 </div>
             </div>
         </div>
@@ -43,28 +63,45 @@
             {{#tickets}}
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Ticket {{id}}
+                        <h3 class="panel-title">On the Call {{id}}
                             <small class="pull-right">{{date}}</small>
                         </h3>
                     </div>
-
                     <div class="panel-body">
 
                         <div class="pull-right">
+                        <div class="list-group">
+                        <p>
                             <button onclick="callCustomer('{{phoneNumber}}')" type="button"
-                                    class="btn btn-primary btn-lg call-customer-button">
+                                    class="btn btn-primary btn-md call-customer-button">
                                 <span class="glyphicon glyphicon-earphone"
                                       aria-hidden="true"></span>
-                                Call customer
-                            </button>
+                                Call
+                            </button></p>
+                            <p><button onclick="callCustomer('{{phoneNumber}}')" type="button"
+                                    class="btn btn-primary btn-md call-customer-button">
+                                
+                                Hold Music
+                            </button></p>
+                             <p><button onclick="callCustomer('{{phoneNumber}}')" type="button"
+                                    class="btn btn-primary btn-md call-customer-button">
+                                
+                                Hang Up
+                            </button></p>
+                            <p><button onclick="callCustomer('{{phoneNumber}}')" type="button"
+                                    class="btn btn-primary btn-md call-customer-button">
+                                <span class="glyphicon glyphicon-earphone"
+                                      aria-hidden="true"></span>
+                                Find Person
+                            </button></p>
                         </div>
-
+                        </div>
                         <p><strong>Name:</strong> {{name}}</p>
 
                         <p><strong>Phone number:</strong> {{phoneNumber}}</p>
 
-                        <p><strong>Description:</strong></p>
-                        {{description}}
+                        <p><strong>Description:</strong>
+                        {{description}}</p>
 
                     </div>
                 </div>
