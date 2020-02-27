@@ -32,6 +32,12 @@ public class PersonService {
   }
 
   @SuppressWarnings("unchecked")
+  public Person findByNumber(String number) {
+    Query query = entityManager.createQuery("SELECT a FROM Person a where a.phoneNumber = :pnumber").setParameter("pnumber", number);
+    if (query.getResultList() != null && query.getResultList().size() > 0) return (Person)query.getResultList().get(0);
+    return (Person)null;
+  }
+  @SuppressWarnings("unchecked")
   public List<Person> findAll() {
     Query query = entityManager.createQuery("SELECT a FROM Person a order by a.name");
     return query.getResultList();

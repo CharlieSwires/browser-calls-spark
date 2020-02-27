@@ -103,6 +103,9 @@ function callSupport() {
 /* End a call */
 function hangUp() {
 	  Twilio.Device.disconnectAll();
+	  $.post("/ticket/delete", {page: window.location.pathname}, function(data) {
+		    // Set up the Twilio Client Device with the token
+		  });
 	}
 function addOutgoing() {
 	  alert("addOutgoing");
@@ -120,5 +123,13 @@ function holdMusic(phoneNumber,on) {
 	  alert("holdMusic"+phoneNumber+on);
 	}
 function disconnect(phoneNumber) {
-	  alert("disconnect"+phoneNumber);
+	Twilio.Device.disconnectAll();
+	  $.post("/ticket/delete", {page: window.location.pathname}, function(data) {
+		    // Set up the Twilio Client Device with the token
+		  });
 	}
+window.onload = function() {
+    setTimeout(function () {
+        location.reload()
+    }, 5000);
+ };

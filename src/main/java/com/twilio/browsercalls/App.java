@@ -61,6 +61,8 @@ public class App {
     post("/call/connect", new CallController().connect);
     post("/ticket/create", new TicketController(ticketService).create,
             new MustacheTemplateEngine());
+    post("/ticket/delete", new TicketController(ticketService).delete,
+            new MustacheTemplateEngine());
     post("/person/create", new PersonController(personService).create,
         new MustacheTemplateEngine());
     get("/conference", conferenceController.index, new MustacheTemplateEngine());

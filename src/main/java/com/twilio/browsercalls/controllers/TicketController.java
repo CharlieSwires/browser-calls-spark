@@ -12,39 +12,51 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TicketController {
-  TicketService ticketService;
+	TicketService ticketService;
 
-  public TicketController(TicketService ticketService) {
-    this.ticketService = ticketService;
-  }
+	public TicketController(TicketService ticketService) {
+		this.ticketService = ticketService;
+	}
 
-  public TemplateViewRoute create = (request, response) -> {
-    return new ModelAndView(createTicket(request), "home.mustache");
-  };
+	public TemplateViewRoute create = (request, response) -> {
+		return new ModelAndView(createTicket(request), "home.mustache");
+	};
+	public TemplateViewRoute delete = (request, response) -> {
+		return new ModelAndView(deleteTicket(request), "home.mustache");
+	};
 
-  public Map createTicket(Request request) {
-    FieldsValidator validator =
-        new FieldsValidator(new String[] {"name", "phone_number", "description"});
+	public Map createTicket(Request request) {
+		FieldsValidator validator =
+				new FieldsValidator(new String[] {"name", "phone_number", "description"});
 
-    Map map = new HashMap();
+		Map map = new HashMap();
 
-    /** Validates that the required parameters are sent on the request. */
-    if (validator.valid(request)) {
-      String name = request.queryParams("name");
-      String phoneNumber = request.queryParams("phone_number");
-      String description = request.queryParams("description");
-      Date date = new Date();
+		/** Validates that the required parameters are sent on the request. */
+		if (validator.valid(request)) {
+			String name = request.queryParams("name");
+			String phoneNumber = request.queryParams("phone_number");
+			String description = request.queryParams("description");
+			Date date = new Date();
 
-      Ticket ticket = new Ticket(name, phoneNumber, description, date);
-      ticketService.create(ticket);
-      map.put("message", true);
-      map.put("notice", "Ticket created successfully");
+			Ticket ticket = new Ticket(name, phoneNumber, description, date);
+			ticketService.create(ticket);
+			map.put("message", true);
+			map.put("notice", "Ticket created successfully");
 
-      return map;
-    } else {
-      map.put("error", true);
-      map.put("errors", validator.errors());
-      return map;
-    }
-  }
+			return map;
+		} else {
+			map.put("error", true);
+			map.put("errors", validator.errors());
+			return map;
+		}
+	}  
+	public Map deleteTicket(Request request) {
+		Map map = new HashMap();
+
+		ticketService.deleteAll();
+		map.put("message", true);
+		map.put("notice", "All Tickets deleted successfully");
+
+		return map;
+	}
 }

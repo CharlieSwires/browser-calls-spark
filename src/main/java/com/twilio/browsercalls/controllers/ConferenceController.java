@@ -12,6 +12,7 @@ import spark.Request;
 import spark.Route;
 import spark.TemplateViewRoute;
 import com.twilio.browsercalls.models.TicketService;
+import com.twilio.browsercalls.models.PersonService;
 import com.twilio.browsercalls.models.Ticket;
 import java.util.Date;
 import javax.persistence.EntityManagerFactory;
@@ -54,8 +55,8 @@ public class ConferenceController {
    */
   public String getXMLJoinResponse() {
     String message =
-        "You are about to join the Charlie's conference." + "Press 1 to join as a listener."
-            + "Press 2 to join as a speaker." + "Press 3 to join as the moderator.";
+        "You are about to join Charlie Brown's conference," + "Press 1 to join as a listener,"
+            + "Press 2 to join as a speaker," + "Press 3 to join as the moderator";
 
     Say sayMessage = new Say.Builder(message).build();
     Gather gather = new Gather.Builder()
@@ -109,6 +110,9 @@ public class ConferenceController {
     Ticket ticket = new Ticket("John Doe",fromNumber,toText[Integer.parseInt(digits)-1],new Date());
     EntityManagerFactory factory = appSetup.getEntityManagerFactory();
     TicketService ticketService = new TicketService(factory.createEntityManager());
+    PersonService personService = new PersonService(factory.createEntityManager());
+    ticket.setName(personService.findByNumber(fromNumber) != null ? 
+    		personService.findByNumber(fromNumber).getName() : "Unknown to twilio");
     ticketService.create(ticket);
     try {
       return voiceResponse.toXml();
