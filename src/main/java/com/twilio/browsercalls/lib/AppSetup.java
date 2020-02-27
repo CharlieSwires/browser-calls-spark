@@ -72,7 +72,14 @@ public class AppSetup {
     return getEnvironmentVariable("TWILIO_APPLICATION_SID",
                           "TWILIO_APPLICATION_SID is not set");
   }
-
+  public String getConferenceNumber() throws UndefinedEnvironmentVariableException {
+	    String number = env.get("TWILIO_RR_NUMBER");
+	    if (number == null) {
+	      throw new UndefinedEnvironmentVariableException("TWILIO_RR_NUMBER is not set");
+	    } else {
+	      return number;
+	    }
+	  }
   private String getEnvironmentVariable(String twilio_account_sid, String message) throws UndefinedEnvironmentVariableException {
     String sid = env.get(twilio_account_sid);
     if (sid == null) {

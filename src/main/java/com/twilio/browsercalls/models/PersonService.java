@@ -33,7 +33,7 @@ public class PersonService {
 
   @SuppressWarnings("unchecked")
   public List<Person> findAll() {
-    Query query = entityManager.createQuery("SELECT a FROM Person a");
+    Query query = entityManager.createQuery("SELECT a FROM Person a order by a.name");
     return query.getResultList();
   }
 

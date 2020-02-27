@@ -45,7 +45,9 @@ public class App {
 
     TicketService ticketService = new TicketService(factory.createEntityManager());
     PersonService personService = new PersonService(factory.createEntityManager());
-
+    ConferenceController conferenceController = new ConferenceController();
+    ticketService.deleteAll();
+    
     /**
      * Seed the database with example data if no records exist.
      */
@@ -61,12 +63,16 @@ public class App {
             new MustacheTemplateEngine());
     post("/person/create", new PersonController(personService).create,
         new MustacheTemplateEngine());
+    get("/conference", conferenceController.index, new MustacheTemplateEngine());
+    post("/conference", conferenceController.join);
+    post("/conference/connect", conferenceController.connect);
+    
 //    Thread t = new Thread(){
 //    	@Override
 //    	public void run(){
     		try{
     			InetAddress ip = InetAddress.getLocalHost();
-    			String command = "ngrok http -subdomain=twiliovizionnetwork"+ip.getHostName()+" 4567";
+    			String command = "ngrok http -subdomain=charliesnetwork"+ip.getHostName()+" 4567";
 //    			String command = "ngrok http 4567";
 //    			Process process = Runtime.getRuntime().exec(command, null, null);
 //    			StringBuilder output = new StringBuilder();
