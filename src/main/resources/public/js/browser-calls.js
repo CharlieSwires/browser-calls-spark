@@ -131,5 +131,5 @@ function disconnect(phoneNumber) {
 window.onload = function() {
     setTimeout(function () {
         location.reload()
-    }, 5000);
+    }, 10000);
  };
